@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($usuario && password_verify($senha, $usuario['senha'])) {
-            $token = criar_jwt($usuario['id']);
+            $token = criar_jwt($usuario['id'], $usuario['email']);
             setcookie("jwt", $token, time() + (86400 * 30), "/");
             echo "Login bem-sucedido!";
         } else {

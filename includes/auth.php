@@ -9,7 +9,7 @@ function base64UrlDecode($data) {
     return base64_decode(strtr($data, '-_', '+/'));
 }
 
-function criar_jwt($id_usuario) {
+function criar_jwt($id_usuario, $email) {
     $chave_secreta = "sua_chave_secreta";
     $header = base64UrlEncode(json_encode(['alg' => 'HS256', 'typ' => 'JWT']));
     $payload = base64UrlEncode(json_encode([
@@ -17,13 +17,15 @@ function criar_jwt($id_usuario) {
         'iat' => time(),
         'exp' => time() + (60 * 60),
         'data' => [
-            'id' => $id_usuario
+            'id' => $id_usuario,
+            'email' => $email
         ]
     ]));
     $signature = hash_hmac('sha256', "$header.$payload", $chave_secreta, true);
     $jwt = "$header.$payload." . base64UrlEncode($signature);
     return $jwt;
 }
+
 
 function verificar_jwt($jwt) {
     $chave_secreta = "sua_chave_secreta";
