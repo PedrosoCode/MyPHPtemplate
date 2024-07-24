@@ -1,5 +1,6 @@
 <?php
 
+// Funções de JWT
 function base64UrlEncode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
 }
@@ -36,6 +37,13 @@ function verificar_jwt($jwt) {
         return null;
     }
     return $payload_decoded['data'];
+}
+
+function check_login() {
+    if (!isset($_COOKIE['jwt']) || verificar_jwt($_COOKIE['jwt']) === null) {
+        header('Location: /public/index.php');
+        exit;
+    }
 }
 
 ?>

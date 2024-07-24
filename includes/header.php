@@ -14,6 +14,7 @@
                 <li><a href="/public/about.php">About</a></li>
                 <li><a href="../public/login.php">Login</a></li>
                 <li><a href="../public/register.php">Register</a></li>
+                <li><a href="../public/logout.php">logout</a></li>
             </ul>
         </nav>
     </header>
