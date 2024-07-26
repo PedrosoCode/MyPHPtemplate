@@ -1,7 +1,8 @@
 <?php
-include '../../config/db.php';
+include '../../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
     $titulo = $_POST['titulo'];
     $subtitulo = $_POST['subtitulo'];
     $conteudo = $_POST['conteudo'];
@@ -10,17 +11,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $database = new Database();
     $db = $database->getConnection();
 
-    $query = "INSERT INTO tb_posts (titulo, subtitulo, conteudo, autor) VALUES (:titulo, :subtitulo, :conteudo, :autor)";
+    $query = "UPDATE tb_posts SET titulo = :titulo, subtitulo = :subtitulo, conteudo = :conteudo, autor = :autor, data_ultima_modificacao = NOW() WHERE id = :id";
     $stmt = $db->prepare($query);
+    $stmt->bindParam(':id', $id);
     $stmt->bindParam(':titulo', $titulo);
     $stmt->bindParam(':subtitulo', $subtitulo);
     $stmt->bindParam(':conteudo', $conteudo);
     $stmt->bindParam(':autor', $autor);
 
     if ($stmt->execute()) {
-        echo "Post criado com sucesso!";
+        echo "Post atualizado com sucesso!";
     } else {
-        echo "Erro ao criar o post.";
+        echo "Erro ao atualizar o post.";
     }
 }
 ?>

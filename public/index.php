@@ -34,7 +34,7 @@ if ($stmt->execute()) {
             <p>Autor: <?php echo htmlspecialchars($post['autor']); ?></p>
             <p>Data de Criação: <?php echo htmlspecialchars($post['data_criacao']); ?></p>
             <p>Última Modificação: <?php echo htmlspecialchars($post['data_ultima_modificacao']); ?></p>
-            <form method="POST" action="../public/posts/update_post.php">
+            <form method="POST" action="../public/posts/functions/update_post.php">
                 <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                 <label for="titulo">Título:</label>
                 <input type="text" name="titulo" value="<?php echo $post['titulo']; ?>" required>
@@ -50,7 +50,7 @@ if ($stmt->execute()) {
                 <br>
                 <button type="submit">Atualizar</button>
             </form>
-            <form method="POST" action="../public/posts/delete_post.php">
+            <form method="POST" action="../public/posts/functions/delete_post.php">
                 <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
                 <button type="submit">Deletar</button>
             </form>
@@ -59,7 +59,7 @@ if ($stmt->execute()) {
 </ul>
 
 <h1>Criar Post</h1>
-<form method="POST" action="../public/posts/create_post.php">
+<form method="POST" action="./posts/functions/create_post.php">
     <label for="titulo">Título:</label>
     <input type="text" id="titulo" name="titulo" required>
     <br>
@@ -74,5 +74,10 @@ if ($stmt->execute()) {
     <br>
     <button type="submit">Criar</button>
 </form>
+
+<p><a href="./posts/pages/list_posts.php">Ver Todos os Posts</a></p>
+<p><a href="./posts/pages/user_posts.php">Ver Meus Posts</a></p>
+<p><a href="./posts/pages/create_post.php">Criar Novo Post</a></p>
+
 
 <?php include '../includes/footer.php'; ?>
